@@ -1,21 +1,31 @@
 /// <reference types="cypress"/>
-
+import produtosPage from "../../support/page-objects/produtos.page";
 
 describe('Funcionalidade: produtos', () => {
    
     beforeEach(() => {
-        cy.visit('produtos')        
+        produtosPage.visitarUrl()   
     });
 
     it('Deve selecionar um produto da lista', () => {
-        cy.get('.product-block')
-        //.first()
-        //.last()
-        //.eq(2)
-        .contains('Apollo Running Short')
-        .click()
+        produtosPage.buscarProdutoLista('Apollo Running Short')
 
         cy.get('#tab-title-description > a').should('contain' , 'Descrição')
 
     });
+
+it.only('Deve buscar um produto com sucesso', () => {
+    let produto = 'Pierce Gym Short'
+    produtosPage.buscarProduto(produto)
+    cy.get('.product_title').should('contain' , produto)
+});
+
+it('Deve visitar a pagina do produto', () => {
+    
+});
+
+it('Deve adicionar o produto no carrinho', () => {
+    
+});
+
 });
